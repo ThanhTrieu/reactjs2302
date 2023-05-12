@@ -11,8 +11,13 @@ const ListTodo = (props) => {
                     renderItem={(item, index) => (
                     <List.Item key={index}>
                         <List.Item.Meta
-                            avatar={<Checkbox />}
-                            title={item.name}
+                            avatar={<Checkbox
+                                        onChange={() => props.finish(item.id)}
+                                        checked={item.done}
+                                    />}
+                            title={ <span
+                                        style={item.done ? {color:'red', textDecoration: 'line-through'} : null}
+                                    > {item.name} </span>}
                         />
                         <div>
                             <DeleteOutlined

@@ -10,13 +10,14 @@ export default function TodoApp(){
 
     //Luu ten cong viec vao trong state
     const changeNameTodo = (event) => {
-        let value = event.target.value.trim();
-        if(value.length > 0 ){
+        let value = event.target.value;
+        if(value.length >= 0 ){
             setNameTodo(value);
         }
     }
     // them moi cong viec
     const addTodo = (works = '') => {
+        works = works.trim();
         if(works.length > 0){
             setIdTodo(idTodo+1);
             setListData([...listData, {
@@ -29,16 +30,20 @@ export default function TodoApp(){
     }
     // xoa cong viec
     const removeItemTodo = (id) => {
-        console.log(id);
-        // id  =2
-        /*
-            [
-                {id: 1, name: 'a'},
-                {id: 2, name: 'b'},
-                {id: 3, name: 'c'},
-            ]
-        */
+        const newWorks = listData.filter(item => item.id !== id);
+        if(newWorks !== undefined){
+            setListData(newWorks);
+        }
+    }
 
+    // hoan thanh cong viec
+    const finishItemTodo = (id) => {
+        const newWork = listData.map(item => {
+            return item.id === id ? {...item, done: !item.done} : item;
+        })
+        if(newWork !== undefined){
+            setListData(newWork);
+        }
     }
 
     return (
@@ -52,6 +57,7 @@ export default function TodoApp(){
                 <ListTodo
                     data={listData}
                     remove={removeItemTodo}
+                    finish={finishItemTodo}
                 />
             </Col>
         </Row>
