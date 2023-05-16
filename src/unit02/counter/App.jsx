@@ -33,7 +33,7 @@ export default function AppCounter(){
             setNumber(value);
         }
     }
-
+    console.log('AppCounter da dc render')
     return (
         <>
             <div className='container'>
