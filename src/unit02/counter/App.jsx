@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import ResultCounter from './components/Result'
 import ButtonCounter from './components/ButtonCounter'
+import HeaderComponent from './components/Header'
+import FooterComponent from './components/Footer'
+
 
 export default function AppCounter(){
     // useState: khai bao - xu ly ve state trong function component
@@ -34,6 +37,7 @@ export default function AppCounter(){
     return (
         <>
             <div className='container'>
+                <HeaderComponent/>
                 <ResultCounter result={count} />
                 <ButtonCounter
                     type="button"
@@ -51,6 +55,7 @@ export default function AppCounter(){
                     defaultValue={number}
                     onChange={changeInputNumber}
                 />
+                <FooterComponent/>
             </div>
         </>
     )

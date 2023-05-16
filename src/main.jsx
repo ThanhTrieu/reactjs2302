@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './covid/App'
+import App from './unit02/counter/App'
 import 'antd/dist/reset.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
