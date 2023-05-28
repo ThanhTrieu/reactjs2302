@@ -4,6 +4,7 @@ import LayoutMovies from "../components/Layout";
 import { Row, Col, Skeleton } from "antd";
 import { api } from "../services/api";
 import { helpers } from "../helpers";
+import ListMovies from "../components/ListMovies";
 
 // eslint-disable-next-line react-refresh/only-export-components
 const HomeMovies = () => {
@@ -55,7 +56,9 @@ const HomeMovies = () => {
         >
             <Row>
                 <Col span={24}>
-                    <h4> Day la trang chu</h4>
+                    <ListMovies
+                        movies={popularMovies}
+                    />
                 </Col>
             </Row>
         </LayoutMovies>
