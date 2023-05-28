@@ -1,25 +1,39 @@
-import {
-    createBrowserRouter
-} from "react-router-dom";
-import HomePage from '../pages/Home';
-import UpcomingPage from '../pages/Upcoming';
-import SearchPage from '../pages/Search';
-import NotFoundPage from '../pages/404'
+import { lazy, Suspense } from "react";
+import { createBrowserRouter } from "react-router-dom";
+import SpinMovies from "../components/commons/Spin";
+
+
+const HomePage     = lazy(() => import('../pages/Home'));
+const UpcomingPage = lazy(() => import('../pages/Upcoming')) ;
+const SearchPage   = lazy(() => import('../pages/Search'));
+const NotFoundPage = lazy(() => import('../pages/404'));
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <HomePage/>,
+        element: (
+            <Suspense fallback={<SpinMovies/>}>
+                <HomePage/>
+            </Suspense>
+        ),
         errorElement: <NotFoundPage/>
     },
     {
         path: "/upcoming",
-        element: <UpcomingPage/>,
+        element: (
+            <Suspense fallback={<SpinMovies/>}>
+                <UpcomingPage/>
+            </Suspense>
+        ),
         errorElement: <NotFoundPage/>
     },
     {
         path: "/search",
-        element: <SearchPage/>,
+        element: (
+            <Suspense fallback={<SpinMovies/>}>
+                <SearchPage/>
+            </Suspense>
+        ),
         errorElement: <NotFoundPage/>
     }
 ]);
