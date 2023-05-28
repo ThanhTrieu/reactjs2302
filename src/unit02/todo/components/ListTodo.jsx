@@ -1,5 +1,6 @@
 import { Row, Col, List, Checkbox } from 'antd'
 import { DeleteOutlined } from '@ant-design/icons'
+import PropTypes from 'prop-types';
 
 const ListTodo = (props) => {
     return (
@@ -30,5 +31,10 @@ const ListTodo = (props) => {
             </Col>
         </Row>
     )
+}
+ListTodo.propTypes = {
+    data: PropTypes.array.isRequired,
+    finish: PropTypes.func.isRequired,
+    remove: PropTypes.func.isRequired
 }
 export default ListTodo

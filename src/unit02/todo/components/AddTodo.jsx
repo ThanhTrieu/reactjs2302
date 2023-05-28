@@ -1,5 +1,6 @@
 import { Row, Col, Typography, Input } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
+import PropTypes from 'prop-types';
 
 const { Title } = Typography;
 const { Search } = Input;
@@ -20,5 +21,11 @@ const AddTodo = (props) => {
             </Col>
         </Row>
     )
+}
+// khai bao dinh nghia: kieu du lieu truyen vao cho props cua components
+AddTodo.propTypes = {
+    change: PropTypes.func.isRequired,
+    add: PropTypes.func.isRequired,
+    value: PropTypes.string
 }
 export default AddTodo;
