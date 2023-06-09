@@ -11,7 +11,8 @@ const HeaderMovies = () => {
     const itemsMenus = [
         {label: <NavLink to="/"> Trang chu </NavLink>, key: '/'},
         {label: <NavLink to="/upcoming">Phim sap trinh chieu</NavLink>, key: '/upcoming'},
-        {label: <NavLink to="/search">Tim kiem</NavLink>, key: '/search'}
+        {label: <NavLink to="/search">Tim kiem</NavLink>, key: '/search'},
+        {label: <NavLink to="/login"> Dang nhap</NavLink>, key: '/login'}
     ];
 
     return (

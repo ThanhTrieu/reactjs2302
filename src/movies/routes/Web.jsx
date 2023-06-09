@@ -9,6 +9,7 @@ const UpcomingPage = lazy(() => import('../pages/Upcoming')) ;
 const SearchPage   = lazy(() => import('../pages/Search'));
 const NotFoundPage = lazy(() => import('../pages/404'));
 const DetailPage   = lazy(() => import('../pages/Detail'));
+const LoginPage    = lazy(() => import('../pages/Login'));
 
 const router = createBrowserRouter([
     {
@@ -45,6 +46,15 @@ const router = createBrowserRouter([
         element: (
             <Suspense fallback={<SpinMovies/>}>
                 <DetailPage/>
+            </Suspense>
+        ),
+        errorElement: <NotFoundPage/>
+    },
+    {
+        path: '/login',
+        element:(
+            <Suspense fallback={<SpinMovies/>}>
+                <LoginPage/>
             </Suspense>
         ),
         errorElement: <NotFoundPage/>

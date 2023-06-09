@@ -97,10 +97,6 @@ const UpcomingMovies = () => {
                     <Row>
                         <Col span={24}>
                             <RangePicker
-                                defaultValue={[
-                                    moment(nextDay, "YYYY-MM-DD"),
-                                    moment(nextMonth, "YYYY-MM-DD")
-                                ]}
                                 format={"YYYY-MM-DD"}
                                 disabledDate={current => {
                                     return current && current < moment().endOf('day');
