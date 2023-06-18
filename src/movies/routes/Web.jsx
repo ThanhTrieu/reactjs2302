@@ -53,7 +53,7 @@ const router = createBrowserRouter([
                         errorElement: <NotFoundPage/>
                     },
                     {
-                        path: "/search",
+                        path: "/search/:name",
                         element: (
                             <Suspense fallback={<SpinMovies/>}>
                                 <SearchPage/>

@@ -1,11 +1,13 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-refresh/only-export-components */
 import React, { useState, useEffect } from "react";
 import LayoutMovies from "../components/Layout";
 import { Row, Col, Image, Skeleton, Button } from "antd";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { api } from "../services/api";
 import { helpers } from "../helpers/index";
 import YouTube from 'react-youtube';
+import { useAuth } from "../hooks/useAuth";
 /*
 import ModalVideo from 'react-modal-video';
 import 'react-modal-video/css/modal-video.min.css';
@@ -17,7 +19,12 @@ const DetailMovies = () => {
     const [loading, setLoading] = useState(true);
     const [movie, setMovie] = useState({});
     const [error, setError] = useState(null);
+    const [favorite, setFavorite] = useState(helpers.checkDataMoviesLocalStorage(id));
     //const [isOpen, setOpen] = useState(false);
+    const { user } = useAuth(); // lay thong tin nguoi dung da dang nhap va duoc luu trong localstorage
+    const navigate = useNavigate();
+    
+
     const opts = {
         height: '390',
         width: '640',
@@ -28,6 +35,25 @@ const DetailMovies = () => {
     };
     const onPlayerReady = (event) => {
         event.target.pauseVideo();
+    }
+
+    const addMovie = () => {
+        if(!user){
+            navigate('/login'); 
+        } else {
+            //luu thong tin cua bo phim vao localstorage
+            helpers.addDataMovieToLocalStorage(movie);
+            setFavorite(true);
+        }
+    }
+
+    const removeMovie = (idMovie) => {
+        if(!user){
+            navigate('/login'); 
+        } else {
+            helpers.removeMovieLocalStorageById(idMovie);
+            setFavorite(false);
+        }
     }
 
     useEffect(() => {
@@ -72,18 +98,39 @@ const DetailMovies = () => {
             level2="Chi tiet"
             level3={slug}
         >
-            <Row style={{ 
-                backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.backdrop_path})`,
-                backgroundRepeat: 'no-repeat',
-                backgroundSize:'cover'
-            }}>
+            <Row 
+                // style={{ 
+                //     backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.backdrop_path})`,
+                //     backgroundRepeat: 'no-repeat',
+                //     backgroundSize:'cover'
+                // }}
+            >
                 <Col span={24}>
                     <h4> Chi  tiet bo phim </h4>
                     <Row>
                         <Col span={8}>
                             <div style={{ padding: '10px' }}>
                                 <Image src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} />
-                                <p>{movie.original_title}</p>
+                                <p style={{ fontWeight: 700 }}>{movie.original_title}</p>
+
+                                { favorite ? 
+                                    (
+                                        <Button
+                                            type="primary"
+                                            danger
+                                            onClick={() => removeMovie(id) }
+                                        > Da yeu thich 
+                                        </Button>
+                                    )
+                                    :
+                                    (
+                                        <Button
+                                            type="primary"
+                                            onClick={() => addMovie() }
+                                        > Yeu thich 
+                                        </Button>
+                                    )
+                                }
                             </div>
                         </Col>
                         <Col span={16}>
@@ -115,7 +162,7 @@ const DetailMovies = () => {
                                 }
                                 </div>
                                 */}
-                                {
+                                {/* {
                                     movie['videos']['results'].map((item,index) => (
                                         <div key={index} style={{ marginBottom: '5px' }}>
                                             <YouTube
@@ -125,7 +172,7 @@ const DetailMovies = () => {
                                             />
                                         </div>
                                     ))
-                                }
+                                } */}
                             </div>
                         </Col>
                         {/* <Col span={8} style={{ padding: '10px' }}>
