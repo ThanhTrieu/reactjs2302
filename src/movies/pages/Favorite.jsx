@@ -5,7 +5,7 @@ import ListMovies from "../components/ListMovies";
 import { helpers } from "../helpers";
 
 const FavoriteMovies = () => {
-    let dataMovies = helpers.getDataMoviesFromLocalStorage();
+    const dataMovies = helpers.getDataMoviesFromLocalStorage();
     return (
         <LayoutMovies
             level1="Phim yeu thich"
