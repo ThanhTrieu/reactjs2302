@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-refresh/only-export-components */
+/* eslint-disable react/prop-types */
 // viet hooks kiem tra - xac thuc thong tin dang nhap
 import { useLocalStorage } from "./useLocalStorage";
 import {
@@ -12,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 // eslint-disable-next-line react-refresh/only-export-components
 const AuthContext = createContext();
 
-export const useAuthProvider = ({ children, userData }) => {
+export const AuthProvider = ({ children, userData }) => {
     const [user, setUser] = useLocalStorage("reactjs2302-movie", userData);
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState(null);
