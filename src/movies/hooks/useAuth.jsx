@@ -33,7 +33,7 @@ export const AuthProvider = ({ children, userData }) => {
                     // thanh cong
                     setUser(res);
                     // dieu huong ve trang mac dinh nao do
-                    navigate("/");
+                    navigate("/", { replace: true });
                 })
                 .catch(err => {
                     // loi
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children, userData }) => {
         // remove data user o local storage
         setUser(null);
         // quay ve login
-        navigate("/login");
+        navigate("/login", { replace: true });
     }
 
     const value = useMemo(() => ({

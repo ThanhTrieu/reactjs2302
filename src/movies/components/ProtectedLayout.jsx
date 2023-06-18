@@ -6,7 +6,7 @@ const ProtectedLayout = () => {
     const outlet   = useOutlet();
 
     if(!user){
-        return <Navigate to="/login" />
+        return <Navigate to="/login" replace={true} />
     }
     return (
         <>

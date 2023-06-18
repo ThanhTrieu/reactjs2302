@@ -39,7 +39,7 @@ const DetailMovies = () => {
 
     const addMovie = () => {
         if(!user){
-            navigate('/login'); 
+            navigate('/login', { replace: true }); 
         } else {
             //luu thong tin cua bo phim vao localstorage
             helpers.addDataMovieToLocalStorage(movie);
@@ -49,7 +49,7 @@ const DetailMovies = () => {
 
     const removeMovie = (idMovie) => {
         if(!user){
-            navigate('/login'); 
+            navigate('/login',{ replace: true}); 
         } else {
             helpers.removeMovieLocalStorageById(idMovie);
             setFavorite(false);
