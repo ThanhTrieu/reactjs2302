@@ -23,7 +23,9 @@
     "react-router-dom": "^6.11.2",
     "react-slugify": "^3.0.2",
     "react-youtube": "^10.1.0",
-    "redux": "^4.2.1"
+    "redux": "^4.2.1",
+    "redux-logger": "^3.0.6",
+    "redux-saga": "^1.2.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

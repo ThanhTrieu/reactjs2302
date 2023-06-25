@@ -6,7 +6,7 @@ import AuthLayoutMovies from "../components/Auth";
 import PublicLayout from "../components/PublicLayout";
 import ProtectedLayout from "../components/ProtectedLayout";
 
-const HomePage     = lazy(() => import('../pages/Home'));
+const HomePage     = lazy(() => import('../pages/HomeV2'));
 const UpcomingPage = lazy(() => import('../pages/Upcoming')) ;
 const SearchPage   = lazy(() => import('../pages/Search'));
 const NotFoundPage = lazy(() => import('../pages/404'));
