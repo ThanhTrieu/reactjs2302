@@ -45,7 +45,7 @@ function getDataMoviesFromLocalStorage(){
 function checkDataMoviesLocalStorage(id = 0){
   id = Number.parseInt(id);
   const dataMovies = getDataMoviesFromLocalStorage();
-  return dataMovies.some(item => item.id === id);
+  return dataMovies !== null ? dataMovies.some(item => item.id === id) : false;
 }
 
 function removeMovieLocalStorageById(id){
