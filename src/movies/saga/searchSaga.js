@@ -1,4 +1,4 @@
-import { call, put, throttle, delay } from 'redux-saga/effects';
+import { call, put, debounce } from 'redux-saga/effects';
 // noi nay se la noi xu ly cac side-effect
 import { api } from "../services/api";
 import { helpers } from "../helpers/index";
@@ -12,7 +12,7 @@ function* searchSaga({ keyword }){
         // bao hieu bat dau call api
         // saga se dispatch action vao reducer trong store
         yield put(actions.startSearchMovie(true));
-        yield delay(1000);
+        //yield delay(1000);
         const dataMovie = yield call(api.searchMoviesByKeyword, keyword, 1);
         //console.log(dataMovie);
         if(!helpers.isEmptyObject(dataMovie)){
@@ -38,5 +38,5 @@ function* searchSaga({ keyword }){
 }
 // 2 - watcher
 export function* watchSearchSaga(){
-    yield throttle(500,actions.SEARCH_BY_KEYWORD, searchSaga);
+    yield debounce(1000,actions.SEARCH_BY_KEYWORD, searchSaga);
 }

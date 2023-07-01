@@ -7,56 +7,65 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as reselect from "../../reselects/searchReselect";
 import * as action from "../../actions/search";
 import { createStructuredSelector } from "reselect";
+import { useDebouncedCallback } from 'use-debounce';
+import slugify from 'react-slugify';
 
 const { Header } = Layout;
 const { Search } = Input;
 
-const searchResult = (query, loading) =>
-    query.map((item) => {
-      if(loading){
-        return {
-          label: <p>...loading</p>
-        }
-      }
-      return {
-        value: item.title,
-        label: (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
-            <span>
-              {item.title}
-            </span>
-          </div>
-        ),
-      };
-    });
+const searchResult = (query, loading) => {
+  if(loading){
+    return {
+      label: <p>...loading</p>
+    }
+  }
+
+  return query.map((item) => {
+    return {
+      value: `/movie/${slugify(item.title)}/${item.id}`,
+      label: (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}
+        >
+          <span>
+            {item.title}
+          </span>
+        </div>
+      ),
+    };
+  });
+}
 
 const HeaderMovies = () => {
+    // eslint-disable-next-line no-unused-vars
+    const [value, setValue] = useState('');
     const [options, setOptions] = useState([]);
     const dispatch = useDispatch();
     const { loading, movies } = useSelector(createStructuredSelector({
       loading: reselect.getLoadingSearch,
       movies: reselect.getDataSearch
     }));
-
-    const handleSearch = (value) => {
-      if(value){
-        dispatch(action.searchMovie(value));
-      }
-      setOptions(searchResult(movies, loading));
-    };
-    const onSelect = (value) => {
-      console.log('onSelect', value);
-    };
     const { pathname } = useLocation();
     const { user, logout } = useAuth();
     const navigate = useNavigate();
 
+    const handleSearch = useDebouncedCallback((value) => {
+      if(value){
+        setValue(value);
+        dispatch(action.searchMovie(value));
+      }
+      setOptions(searchResult(movies, loading));
+    },1000);
+
+    const onSelect = (value) => {
+      navigate(value);
+    };
+
     // nhap tim kiem se chuyen ngay sang trang tim kiem
+    // eslint-disable-next-line no-unused-vars
     const searchMovieByName = (nameMovie) => {
         nameMovie = nameMovie.trim();
         if(nameMovie.length > 0){
@@ -89,6 +98,7 @@ const HeaderMovies = () => {
             <Search
               size="large"
               placeholder="input here" enterButton
+              defaultValue={''}
             />
           </AutoComplete>
         },
